@@ -1,0 +1,109 @@
+package Practice;
+
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+public class TOPS {
+
+	public WebDriver driver = null;
+
+	@BeforeClass
+	public void setup() throws Throwable {
+		System.setProperty("webdriver.gecko.driver",
+				"C:\\Users\\skum199\\eclipse-workspace\\DK_Cirrus_Testing\\geckodriver.exe");
+		DesiredCapabilities capabilities = new DesiredCapabilities();
+		capabilities.setCapability("marionette", false);
+		driver = new FirefoxDriver(capabilities);
+		driver.manage().deleteAllCookies();
+		driver.manage().window().maximize();
+		driver.get("http://datakart-stage.optum.com/daaslanding/");
+		driver.findElement(By.xpath(".//*[@id='anc_dkplus']")).click();
+		driver.findElement(By.xpath(".//*[@id='txtUserName']")).sendKeys("skum199");
+		driver.findElement(By.xpath(".//*[@id='txtPass']")).sendKeys("Maverick_18");
+		driver.findElement(By.xpath(".//*[@id='_LoginBtn']")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath(".//*[@id='lbl_rbtn_EDI']")).click();
+		driver.findElement(By.xpath(".//*[@id='btn_go_dkplus']")).click();
+	}
+
+	@Test(priority = 1)
+	public void TestCase1() throws Throwable {
+		driver.findElement(By.xpath(".//*[@id='dvSideMenu']/div/div/ul/li[11]/a")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath(".//*[@id='txt_request_result_count']")).clear();
+		driver.findElement(By.xpath(".//*[@id='txt_request_result_count']")).sendKeys("10");
+		driver.findElement(By.xpath(".//*[@id='ddl_Environment']")).sendKeys("Alpha");
+		driver.findElement(By.xpath(".//*[@id='ddlGender']")).sendKeys("Male");
+		driver.findElement(By.xpath(".//*[@id='ddl_cob']")).sendKeys("Yes");
+		driver.findElement(By.xpath(".//*[@id='btn_save_criteria']")).click();
+		WebDriverWait wait = new WebDriverWait(driver, 30000);
+		wait.until(ExpectedConditions.alertIsPresent()).accept();
+		new WebDriverWait(driver, 5000)
+				.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='dvSideMenu']/div/div/ul/li[11]/a")))
+				.click();
+
+	}
+
+	@Test(priority = 2)
+	public void TestCase2() throws Throwable {
+		driver.findElement(By.xpath(".//*[@id='dvSideMenu']/div/div/ul/li[11]/a")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath(".//*[@id='txt_request_result_count']")).clear();
+		driver.findElement(By.xpath(".//*[@id='txt_request_result_count']")).sendKeys("20");
+		driver.findElement(By.xpath(".//*[@id='ddl_Environment']")).sendKeys("Alpha");
+		driver.findElement(By.xpath(".//*[@id='ddlGender']")).sendKeys("Female");
+		driver.findElement(By.xpath(".//*[@id='ddl_cob']")).sendKeys("Yes");
+		driver.findElement(By.xpath(".//*[@id='btn_save_criteria']")).click();
+		WebDriverWait wait = new WebDriverWait(driver, 30000);
+		wait.until(ExpectedConditions.alertIsPresent()).accept();
+		new WebDriverWait(driver, 5000)
+				.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='dvSideMenu']/div/div/ul/li[11]/a")))
+				.click();
+	}
+
+	@Test(priority = 3)
+	public void TestCase3() throws Throwable {
+		driver.findElement(By.xpath(".//*[@id='dvSideMenu']/div/div/ul/li[11]/a")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath(".//*[@id='txt_request_result_count']")).clear();
+		driver.findElement(By.xpath(".//*[@id='txt_request_result_count']")).sendKeys("10");
+		driver.findElement(By.xpath(".//*[@id='ddl_Environment']")).sendKeys("Bravo");
+		driver.findElement(By.xpath(".//*[@id='ddlGender']")).sendKeys("Male");
+		driver.findElement(By.xpath(".//*[@id='ddl_cob']")).sendKeys("Yes");
+		driver.findElement(By.xpath(".//*[@id='btn_save_criteria']")).click();
+		WebDriverWait wait = new WebDriverWait(driver, 50000);
+		wait.until(ExpectedConditions.alertIsPresent()).accept();
+		new WebDriverWait(driver, 5000)
+				.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='dvSideMenu']/div/div/ul/li[11]/a")))
+				.click();
+	}
+
+	@Test
+	public void TestCase4() throws Throwable {
+
+		driver.findElement(By.xpath(".//*[@id='ddlGender']")).sendKeys("male");
+		driver.findElement(By.xpath(".//*[@id='ddlMember_Type']")).sendKeys("Subscriber");
+		driver.findElement(By.xpath(".//*[@id='txt_paid_amt']")).sendKeys("100");
+		driver.findElement(By.xpath(".//*[@id='btn_save_criteria']")).click();
+		WebDriverWait wait = new WebDriverWait(driver, 50000);
+		wait.until(ExpectedConditions.alertIsPresent()).accept();
+		new WebDriverWait(driver, 5000)
+				.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='dvSideMenu']/div/div/ul/li[11]/a")))
+				.click();
+	}
+
+	@AfterTest
+	public void EndSession() {
+		driver.quit();
+	}
+
+}
