@@ -1,0 +1,22 @@
+git init
+
+
+git config --global user.name "skum199"
+
+git config --global user.email "santosh_kumar4@optum.com"
+
+git add . ( adds in the local repository)
+
+git status
+
+
+git remote add origin https://tchauhan@codehub.optum.com/git_hub/git_project1.git
+
+
+git commit -m "File added"
+
+
+$ git push origin master
+
+
+6:36 PM
